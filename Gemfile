@@ -14,6 +14,7 @@ group :test do
   gem 'pry'
   gem 'pry-nav'
   gem 'capybara'
+  gem 'shotgun'
   gem 'rack-test'
   gem 'database_cleaner', git: 'https://github.com/bmabey/database_cleaner.git'
 end
