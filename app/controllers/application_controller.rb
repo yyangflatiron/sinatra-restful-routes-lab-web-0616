@@ -14,18 +14,13 @@ class ApplicationController < Sinatra::Base
     erb :new
   end
 
-  #create to save
-  post '/recipes' do
-    @recipe = Recipe.new(params)
-    @recipe.save
-    redirect to '/recipes/#{@recipe.id}'
-  end
-
   #show
   get '/recipes/:id' do
     @recipe = Recipe.find(params[:id])
     erb :show
   end
+
+
 
   #edit part 1
   get '/recipes/:id/edit' do
@@ -34,13 +29,20 @@ class ApplicationController < Sinatra::Base
   end
 
   #edit part 2
-  patch '/receipts/:id' do
+  patch '/recipes/:id' do
     @recipe=Recipe.find(params[:id])
     @recipe.name = params[:name]
     @recipe.ingredients = params[:ingredients]
     @recipe.cook_time = params[:cook_time]
     @recipe.save
     erb :show
+  end
+
+  #create to save
+  post '/recipes' do ##WHY IS THIS NOT WORKING
+    @recipe = Recipe.create(params)
+    erb :show
+    redirect to "/recipes/#{@recipe.id}"
   end
 
   delete '/recipes/:id/delete' do
